@@ -8,8 +8,11 @@ const MainPage = (props) => {
                     <div className={classes.taskCard} key={task.id}>
                         <div>{task.title}</div>
                         <div>{task.description}</div>
-                        <div>{task.deadline.getFullYear() + '.' + (task.deadline.getMonth() + 1) + '.'
-                            + task.deadline.getDate() + ' ' + task.deadline.getHours() + ':' + task.deadline.getMinutes() + ':' + task.deadline.getSeconds()}</div>
+                        <div>
+                            {task.deadline.getFullYear() + '.' + (task.deadline.getMonth() + 1) + '.'
+                            + task.deadline.getDate() + ' ' + task.deadline.getHours() + ':'
+                            + task.deadline.getMinutes() + ':' + task.deadline.getSeconds()}
+                        </div>
                     </div>
                 )
             )}
