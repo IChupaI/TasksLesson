@@ -8,25 +8,22 @@ const MainPage = (props) => {
     const [value, setValue] = useState('')
     const [tasks, setTasks] = useState(TASK_TEST_LIST)
 
-    useEffect(() => {
-
-    }, [tasks])
 
     const handleChangeControlled = (event) => {
         event.preventDefault()
         setValue(event.target.value)
     }
 
-    const handleClickControlled = useCallback(() => {
-        const currentTasks = tasks
-        currentTasks.push({
-            id: currentTasks.length + 1,
+    const handleClickControlled = (event) => {
+        const taskNumber = tasks.length + 1
+        const newTasks = {
+            id: tasks.length + 1,
             title: value,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+            description: 'test Task' + ' ' + taskNumber,
             deadline: new Date(),
-        })
-        setTasks(currentTasks)
-    }, [tasks, setTasks, value])
+        }
+        setTasks([...tasks, newTasks])
+    }
 
     return (
         <div className={classes.mainPageWrapper}>
