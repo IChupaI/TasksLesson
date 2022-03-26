@@ -11,18 +11,10 @@ function App() {
     // is task completed
     // edit create delete tasks
 
-    const [tasks, setTasks] = useState([])
-
-    useEffect( () => {
-
-        setTasks(TASK_TEST_LIST)
-
-    }, [])
-
 
     return (
         <div className="App">
-            <MainPage tasks = {tasks}/>
+            <MainPage />
         </div>
     );
 }
