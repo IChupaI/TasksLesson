@@ -2,6 +2,8 @@ import React, {memo, useState} from "react";
 import classes from './mainPage.module.css'
 import TaskCard from "./TaskCard";
 import Tasks from "./store/tasks";
+import {apiGateaway} from "./API/api";
+import moment from "moment";
 
 
 const MainPage = () => {
@@ -20,10 +22,15 @@ const MainPage = () => {
         setDescription(e.target.value)
     }
 
-    const addNewTask = () => {
-        Tasks.addTask({title, description})
-        setTitle('')
-        setDescription('')
+    const addNewTask = async () => {
+        const res = await apiGateaway.tasks.createTask({title: title, description: description, deadline: moment()} /*Tasks.tasks*/)
+        if (res.status !==200) {
+            console.log('Something wrong')
+            console.log(res)
+        }
+        // Tasks.addTask({title, description})
+        // setTitle('')
+        // setDescription('')
     }
 
     return (
