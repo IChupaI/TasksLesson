@@ -8,3 +8,12 @@
     margin: 1em auto;
     width: 20%;
 }
+
+.overdue {
+    color: red;
+}
+
+.commonDeadline {
+    color: green;
+}
+
