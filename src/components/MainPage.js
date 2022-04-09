@@ -1,7 +1,7 @@
 import React, {memo, useState} from "react";
 import classes from './mainPage.module.css'
 import TaskCard from "./TaskCard";
-import Tasks from "./store/tasks";
+import {TaskState} from "./store/tasks";
 import {apiGateaway} from "../API/api";
 import moment from "moment";
 
@@ -24,23 +24,28 @@ const MainPage = () => {
 
     const addNewTask = async () => {
         const res = await apiGateaway.tasks.createTask({title: title, description: description, deadline: moment()} /*Tasks.tasks*/)
-        if (res.status !==200) {
+
+        if (res.status !== 201) {
             console.log('Something wrong')
             console.log(res)
+            return null
         }
-        // Tasks.addTask({title, description})
-        // setTitle('')
-        // setDescription('')
+        const allTasksRes = await apiGateaway.tasks.getTasks()
+        TaskState.setTasks(allTasksRes.data)
     }
 
     return (
         <div className={classes.mainPageWrapper}>
             <div>
-                <input placeholder="Title" value={title} onChange={handleChangeTitle}/>
-                <input placeholder="Description" value={description} onChange={handleChangeDescription}/>
+                <input placeholder="Title"
+                       value={title}
+                       onChange={handleChangeTitle}/>
+                <input placeholder="Description"
+                       value={description}
+                       onChange={handleChangeDescription}/>
                 <button onClick={addNewTask}>Create Task</button>
             </div>
-            {Tasks.tasks.map(task => <TaskCard task={task} key={task.id}/>)}
+            {TaskState.tasks.map(task => <TaskCard task={task} key={task.id}/>)}
         </div>
     )
 }

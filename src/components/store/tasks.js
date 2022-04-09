@@ -4,22 +4,29 @@ class Tasks {
     constructor() {
         makeAutoObservable(this)
     }
-
-    tasks = [{
-        id: 1, title: 'Task', description: 'testTask', deadline: new Date(),
-    }, {
-        id: 2, title: 'Task2', description: 'test Task 2', deadline: new Date(),
-    }, {
-        id: 3, title: 'Task3', description: 'test Task 3', deadline: ("2023-11-08T17:44:56.144"),
-    }];
-
-    addTask = ({title, description}) => {
-        const newTask = {
-            id: this.tasks.length + 1, title, description, deadline: new Date(),
-        }
-        this.tasks.push(newTask);
+    tasks = [
+        {
+            id: 1,
+            title: 'Task 1',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+            deadline: new Date(),
+        } ,
+        {
+            id: 2,
+            title: 'Task 2',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+            deadline: new Date(),
+        } ,
+        {
+            id: 3,
+            title: 'Task 3',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+            deadline: new Date(),
+        },
+    ]
+    setTasks(tasksArr) {
+        this.tasks = tasksArr
     }
-
 }
 
-export default new Tasks()
+export const TaskState = new Tasks()
