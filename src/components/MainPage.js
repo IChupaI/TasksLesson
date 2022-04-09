@@ -2,7 +2,7 @@ import React, {memo, useState} from "react";
 import classes from './mainPage.module.css'
 import TaskCard from "./TaskCard";
 import Tasks from "./store/tasks";
-import {apiGateaway} from "./API/api";
+import {apiGateaway} from "../API/api";
 import moment from "moment";
 
 
