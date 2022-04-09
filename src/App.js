@@ -1,7 +1,5 @@
 import './App.css';
 import MainPage from "./components/MainPage";
-import {TASK_TEST_LIST} from "./constans";
-import {useEffect, useState} from "react";
 
 function App() {
     // tasks list
