@@ -11,7 +11,6 @@ const MainPage = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
 
-
     const handleChangeTitle = (e) => {
         e.preventDefault()
         setTitle(e.target.value)
@@ -24,7 +23,6 @@ const MainPage = () => {
 
     const addNewTask = async () => {
         const res = await apiGateaway.tasks.createTask({title: title, description: description, deadline: moment()} /*Tasks.tasks*/)
-
         if (res.status !== 201) {
             console.log('Something wrong')
             console.log(res)
