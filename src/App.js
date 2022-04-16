@@ -9,7 +9,6 @@ function App() {
     // is task completed
     // edit create delete tasks
 
-
     return (
         <div className="App">
             <MainPage />

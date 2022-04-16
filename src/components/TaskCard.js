@@ -2,11 +2,10 @@ import React, {useRef, useState} from 'react';
 import moment from "moment";
 import {taskDeadlineOverdueDetector} from "../logic/taskDeadlineOverdueDetector";
 import classes from "./mainPage.module.css";
-import {apiGateaway} from "../API/api";
 import MyModal from "./MyModal";
-import {TaskState} from "./store/tasks";
 
-const TaskCard = ({task}) => {
+
+const TaskCard = ({task, deleteTask, editTask}) => {
 
     const {current: isOverdue} = useRef(taskDeadlineOverdueDetector(task.deadline))
 
@@ -22,26 +21,6 @@ const TaskCard = ({task}) => {
         setValue({...value, description: e.target.value})
     }
 
-    const deleteTask = async () => {
-        const res = await apiGateaway.tasks.deleteTasks({id: task.id})
-        if (res.status !== 201) {
-            console.log('Something wrong')
-            console.log(res)
-            return null
-        }
-        console.log(res)
-    }
-
-    const editTask = async () => {
-        const res = await apiGateaway.tasks.editTask({id: task.id, title: value.title, description: value.description, deadline: moment()})
-        if (res.status !== 201) {
-            console.log('Something wrong')
-            console.log(res)
-            return null
-        }
-        const allTasksRes = await apiGateaway.tasks.getTasks()
-        TaskState.setTasks(allTasksRes.data)
-    }
 
     return (
         <div className={classes.taskCard}>
@@ -50,7 +29,7 @@ const TaskCard = ({task}) => {
             <div className={isOverdue ? classes.overdue : classes.commonDeadline}>
                 {moment(task.deadline).format('LLL')}
             </div>
-            <button onClick={deleteTask}>X</button>
+            <button onClick={() => deleteTask(task)} >X</button>
             <button onClick={() => setModal(true)}>pencil.png</button>
             <MyModal visible={modal}  setVisible={setModal}>
                 <input
@@ -65,7 +44,7 @@ const TaskCard = ({task}) => {
                     onChange = {handleDescriptionChange}
                     value={value.description}
                 />
-                <button onClick={editTask}>Добавить</button>
+                <button onClick={() => editTask(task, value)}>Добавить</button>
             </MyModal>
         </div>
     );
